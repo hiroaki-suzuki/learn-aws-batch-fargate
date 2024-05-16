@@ -229,3 +229,6 @@ dist
 cdk.out/
 
 /.idea/material_theme_project_new.xml
+
+batch/lib
+/cdk/cdk.context.json
