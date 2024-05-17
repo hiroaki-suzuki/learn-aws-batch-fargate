@@ -33,9 +33,14 @@ export class CdkStack extends cdk.Stack {
       vpc: network.vpc,
     });
 
+    const s3 = new S3(this, 'S3', {
+      namePrefix,
+      envValues,
+    });
     const iam = new IAM(this, 'IAM', {
       namePrefix,
       envValues,
+      bucket: s3.bucket,
     });
 
     const ecr = new Ecr(this, 'Ecr', {
@@ -51,11 +56,6 @@ export class CdkStack extends cdk.Stack {
       ecsExecRole: iam.ecsExecRole,
       ecsTaskRole: iam.ecsTaskRole,
       repository: ecr.repository,
-    });
-
-    const s3 = new S3(this, 'S3', {
-      namePrefix,
-      envValues,
     });
 
     const sqs = new SQS(this, 'SQS', {
