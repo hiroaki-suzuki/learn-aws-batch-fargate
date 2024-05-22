@@ -44,7 +44,7 @@ export class EventRule extends Construct {
             name: [bucket.bucketName],
           },
           object: {
-            key: [{ wildcard: 'originals/*' }],
+            key: [{ prefix: 'original/' }],
           },
         },
       },
