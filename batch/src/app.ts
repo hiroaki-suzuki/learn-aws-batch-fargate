@@ -36,12 +36,13 @@ interface LogInfo {
     } as const;
     const { values } = parseArgs({ options, args });
 
-    if (values.objectKey && values.objectKey.endsWith('/')) {
-      return;
-    }
-
     logInfo.bucketName = values.bucketName!;
     logInfo.objectKey = values.objectKey!;
+
+    if (logInfo.objectKey && logInfo.objectKey.endsWith('/')) {
+      console.log(JSON.stringify(logInfo));
+      return;
+    }
 
     const client = new S3Client({ region: 'ap-northeast-1' });
     const getCommand = new GetObjectCommand({
