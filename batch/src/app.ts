@@ -36,6 +36,10 @@ interface LogInfo {
     } as const;
     const { values } = parseArgs({ options, args });
 
+    if (values.objectKey && values.objectKey.endsWith('/')) {
+      return;
+    }
+
     logInfo.bucketName = values.bucketName!;
     logInfo.objectKey = values.objectKey!;
 
